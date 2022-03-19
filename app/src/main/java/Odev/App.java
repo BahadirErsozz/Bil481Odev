@@ -23,8 +23,8 @@ public class App {
     }
 
     public static void main(String[] args) {
-        port(getHerokuAssignedPort());
-        
+        //port(getHerokuAssignedPort());
+        port(4567);
         //
         post("/compute", (req, res) -> {
             //System.out.println(req.queryParams("input1"));
