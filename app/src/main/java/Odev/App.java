@@ -10,8 +10,11 @@ import static spark.Spark.get;
   import java.util.ArrayList;
   import java.util.HashMap;
   import java.util.Map;
+import java.util.logging.LogManager;
 
-  import spark.ModelAndView;
+import org.slf4j.Logger;
+
+import spark.ModelAndView;
   import spark.template.mustache.MustacheTemplateEngine;
 
 public class App {
@@ -21,8 +24,12 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
-
+        
         get("/", (req, res) -> "Hello, Woqrld");
+
+        int port = Integer.parseInt(System.getenv("PORT"));
+        port(port);
+        
 
         post("/compute", (req, res) -> {
             //System.out.println(req.queryParams("input1"));
@@ -43,8 +50,11 @@ public class App {
   
             String input2 = req.queryParams("input2").replaceAll("\\s","");
             int input2AsInt = Integer.parseInt(input2);
+
+            String input3 = req.queryParams("input3").replaceAll("\\s","");
+            int input3AsInt = Integer.parseInt(input3);
   
-            int result = App.searchBetween(inputList, input2AsInt, 5);
+            int result = App.searchBetween(inputList, input2AsInt, input3AsInt);
   
             Map<String, Integer> map = new HashMap<String, Integer>();
             map.put("result", result);
@@ -71,6 +81,7 @@ public class App {
     }
 
     public static int searchBetween(ArrayList<Integer> list, int i, int j){
+        if(list == null) return 0;
         int count = 0;
         for(int k : list)
             if(k >= i && k <= j)

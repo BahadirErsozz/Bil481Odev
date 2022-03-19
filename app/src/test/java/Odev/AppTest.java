@@ -6,6 +6,8 @@ package Odev;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.checkerframework.checker.units.qual.A;
 
 class AppTest {
@@ -14,13 +16,51 @@ class AppTest {
         assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
     }
     @Test
-    public void testFound(){
-        int a = 5;
+    public void testNullArr(){
+        ArrayList<Integer> arr = null;
+        assertEquals(0, App.searchBetween(arr, 0, 0));
     
     }
     @Test
-    public void testNotFound(){
-        int a = 7;
+    public void testEmptyArr(){
+        ArrayList<Integer> arr = new ArrayList<>();
+        assertEquals(0, App.searchBetween(arr, 0, 0));
     
+    }
+    @Test
+    public void testiGreaterThanj(){
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(0);
+        arr.add(1);
+        arr.add(2);
+        arr.add(3);
+        arr.add(4);
+        arr.add(5);
+
+        assertEquals(0, App.searchBetween(arr, 3, 1));
+    }
+    @Test
+    public void testiEqualsToj(){
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(0);
+        arr.add(1);
+        arr.add(2);
+        arr.add(3);
+        arr.add(4);
+        arr.add(5);
+
+        assertEquals(1, App.searchBetween(arr, 3, 3));
+    }
+    @Test
+    public void testFound(){
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(0);
+        arr.add(1);
+        arr.add(2);
+        arr.add(3);
+        arr.add(4);
+        arr.add(5);
+
+        assertEquals(4, App.searchBetween(arr, 1, 4));
     }
 }
