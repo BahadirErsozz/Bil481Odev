@@ -23,12 +23,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-        
-        get("/", (req, res) -> "Hello, Woqrld");
-
-        int port = Integer.parseInt(System.getenv("PORT"));
-        port(port);
+        port(getHerokuAssignedPort());
         
 
         post("/compute", (req, res) -> {
